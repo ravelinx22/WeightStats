@@ -1,0 +1,39 @@
+{
+	"name": "WeightStats",
+	"version": "0.1.0",
+	"private": true,
+	"main": "public/main.js",
+	"homepage": "./",
+	"dependencies": {
+		"electron-is-dev": "^0.3.0",
+		"react": "^16.4.0",
+		"react-dom": "^16.4.0",
+		"react-scripts": "1.1.4"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test --env=jsdom",
+		"eject": "react-scripts eject",
+		"electron-start": "electron .",
+		"electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+		"preelectron-pack": "yarn build",
+		"electron-pack": "build -c.extraMetadata.main=build/main.js"
+	},
+	"devDependencies": {
+		"concurrently": "^3.5.1",
+		"electron": "^2.0.2",
+		"electron-builder": "^20.15.1",
+		"wait-on": "^2.1.0"
+	},
+	"build": {
+		"appId": "com.weightstats",
+		"files": [
+			"build/**/*",
+			"node_modules/**/*"
+		],
+		"directories": {
+			"buildResources": "assets"
+		}
+	}
+}
