@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { Container } from "reactstrap";
 
 class App extends Component {
   render() {
     return (
-		<div className="App">
+		<Container fluid={true} className="App">
 			{this.props.children}
-		</div>
+		</Container>
     );
   }
 }
