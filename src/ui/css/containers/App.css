@@ -1,0 +1,28 @@
+/* App */
+
+.app {
+	height: 100vh;
+	padding: 0 !important;
+	width: 100vw;
+}
+
+.row_app {
+	height: 100%;
+	margin: 0 !important;
+	width: 100%;
+}
+
+.left_side {
+	background-color: #2F313D;
+	color: #9BA2C9;
+	height: 100%;
+	overflow: hidden;
+	width: 100%;
+}
+
+.right_side {
+	background-color: #393B4A;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}

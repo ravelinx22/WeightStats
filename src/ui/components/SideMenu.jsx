@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../css/SideMenu.css";
+import "../css/components/SideMenu.css";
 import { withRouter } from "react-router-dom";
 
 class SideMenu extends Component {
@@ -15,7 +15,7 @@ class SideMenu extends Component {
 
 	render() {
 		return(
-			<h1>Hello World</h1>					
+			<div></div>
 		);			
 	}
 }

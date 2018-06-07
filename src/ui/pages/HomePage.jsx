@@ -1,5 +1,5 @@
 import React, { Component  } from "react";
-import "../css/HomePage.css";
+import "../css/pages/HomePage.css";
 
 export default class HomePage extends Component {
 	constructor(props) {
@@ -13,9 +13,7 @@ export default class HomePage extends Component {
 
 	render() {
 		return (
-			<h1>
-				Buenas
-			</h1>
+			<div></div>
 		);
 	}
 }
