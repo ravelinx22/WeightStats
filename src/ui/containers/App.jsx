@@ -8,7 +8,7 @@ class App extends Component {
 	render() {
 		return (
 			<Container fluid={true} className="app">
-				<Row className="row_app" fluid={true}>
+				<Row className="row_app">
 					<Col md="3" sm="3" xs="3" className="left_side">
 						<SideMenu/>
 					</Col>

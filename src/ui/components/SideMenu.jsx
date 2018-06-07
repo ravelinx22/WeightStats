@@ -1,6 +1,9 @@
 import React, { Component } from "react";
-import "../css/components/SideMenu.css";
 import { withRouter } from "react-router-dom";
+import { Container } from "reactstrap";
+
+import "../css/components/SideMenu.css";
+import SideMenuBtn from "./SideMenuBtn.jsx";
 
 class SideMenu extends Component {
 	constructor(props) {
@@ -15,7 +18,10 @@ class SideMenu extends Component {
 
 	render() {
 		return(
-			<div></div>
+			<Container>
+				<SideMenuBtn text="Home" url="/" />
+				<SideMenuBtn text="History" url="/history" />
+			</Container>
 		);			
 	}
 }
