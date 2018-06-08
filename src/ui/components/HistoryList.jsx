@@ -18,7 +18,7 @@ export default class HistoryList extends Component {
 		const test = [1,2,3,4,5];
 
 		return test.map((item) => {
-			return <HistoryItem/>
+			return <HistoryItem key={item} />
 		});
 	}
 

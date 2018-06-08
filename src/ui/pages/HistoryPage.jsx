@@ -22,7 +22,7 @@ export default class HistoryPage extends Component {
 				</Row>
 				<Row>
 					<Col md="4" className="title row_title">Date</Col>
-					<Col md="4" className="title row_title">Weight</Col>
+					<Col md="4" className="title row_title">Weight (lbs)</Col>
 					<Col md="4" className="title row_title">Options</Col>
 				</Row>
 				<NewHistory/>

@@ -20,7 +20,7 @@ export default class HistoryItem extends Component {
 					20-09-18
 				</Col>
 				<Col md="4" className="history_col">
-					128 Kg
+					128 lbs
 				</Col>
 				<Col md="4" className="history_col">
 					<Row className="justify-content-center">
