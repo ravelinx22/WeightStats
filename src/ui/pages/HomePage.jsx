@@ -19,6 +19,8 @@ export default class HomePage extends Component {
 	componentDidMount() {
 	}
 
+	// Listeners
+
 	onStartDateChange(date) {
 		this.setState({
 			startDate: date
@@ -28,6 +30,28 @@ export default class HomePage extends Component {
 	onEndDateChange(date) {
 		this.setState({
 			endDate: date
+		});
+	}
+
+	//	Helpers
+	renderObjectiveOptions() {
+		const options = ["Loss", "Gain"];
+		return options.map((option) => {
+			return <option value={option}>{option}</option>
+		});
+	}
+
+	renderFrequencyOptions() {
+		const options = ["Weekly", "Montly"];
+		return options.map((option) => {
+			return <option value={option}>{option}</option> 
+		});
+	}
+
+	renderWeightOptions() {
+		const options = ["0.5","1.0"];
+		return options.map((option) => {
+			return <option value={option}>{option}</option>;
 		});
 	}
 
@@ -56,6 +80,26 @@ export default class HomePage extends Component {
 				</Container>
 				<Container>
 					<h6 className="title">Compare with objective</h6>
+					<Row>
+						<Col md="4" className="options_col">
+							<div>Objective</div>
+							<select>
+								{this.renderObjectiveOptions()}	
+							</select>
+						</Col>
+						<Col md="4" className="options_col">
+							<div>Frequency</div>
+							<select>
+								{this.renderFrequencyOptions()}	
+							</select>
+						</Col>
+						<Col md="4" className="options_col">
+							<div>Amount (lbs)</div>
+							<select>
+								{this.renderWeightOptions()}
+							</select>
+						</Col>
+					</Row>
 				</Container>
 			</Container>
 		);

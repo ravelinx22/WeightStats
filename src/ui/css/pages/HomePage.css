@@ -3,3 +3,12 @@
 .title {
 	margin: 20px 0 10px 0;
 }
+
+.options_col {
+	text-align: center;
+}
+
+.options_col > div {
+	color: #AFB5E3;
+	margin: 10px 0;
+}
