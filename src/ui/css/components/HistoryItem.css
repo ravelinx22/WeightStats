@@ -1,0 +1,14 @@
+/* History Item */
+
+.history_item {
+	margin-top: 10px;
+	color: #9BA2C9;
+}
+
+.history_col {
+	text-align: center;
+}
+
+.history_col > .row {
+	width: 100%;
+}

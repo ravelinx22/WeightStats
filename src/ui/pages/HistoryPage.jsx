@@ -1,4 +1,8 @@
 import React, { Component  } from "react";
+import { Container, Row, Col } from "reactstrap";
+
+import NewHistory from "../components/NewHistory";
+import HistoryList from "../components/HistoryList";
 
 export default class HistoryPage extends Component {
 	constructor(props) {
@@ -12,7 +16,18 @@ export default class HistoryPage extends Component {
 
 	render() {
 		return (
-			<h1>History</h1>
+			<Container>
+				<Row>
+					<h3 className="page_title title">Weight History</h3>
+				</Row>
+				<Row>
+					<Col md="4" className="title row_title">Date</Col>
+					<Col md="4" className="title row_title">Weight</Col>
+					<Col md="4" className="title row_title">Options</Col>
+				</Row>
+				<NewHistory/>
+				<HistoryList/>
+			</Container>
 		 );
 	}
 }
