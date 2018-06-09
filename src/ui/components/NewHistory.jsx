@@ -5,6 +5,7 @@ import moment from 'moment';
 
 import "../css/components/NewHistory.css";
 import 'react-datepicker/dist/react-datepicker.css';
+import "../css/components/Btn.css";
 
 export default class NewHistory extends Component {
 	constructor(props) {
@@ -36,7 +37,7 @@ export default class NewHistory extends Component {
 					<input type="number"/>
 				</Col>
 				<Col md="4" className="new_history_col">
-					<button>Add</button>
+					<button className="option_btn">Add</button>
 				</Col>
 			</Row>
 		);

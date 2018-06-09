@@ -1,6 +1,8 @@
 import React, { Component  } from "react";
 import { Row, Col } from "reactstrap";
 
+import RemoveBtn from "./RemoveBtn.jsx";
+import EditBtn from "./EditBtn.jsx";
 import "../css/components/HistoryItem.css";
 
 export default class HistoryItem extends Component {
@@ -24,8 +26,8 @@ export default class HistoryItem extends Component {
 				</Col>
 				<Col md="4" className="history_col">
 					<Row className="justify-content-center">
-						<button>Edit</button>
-						<button>Remove</button>
+						<EditBtn/>
+						<RemoveBtn/>
 					</Row>
 				</Col>
 			</Row>

@@ -5,6 +5,7 @@ import moment from 'moment';
 import * as d3 from "d3";
 
 import "../css/pages/HomePage.css";
+import "../css/components/Btn.css";
 import 'react-datepicker/dist/react-datepicker.css';
 
 export default class HomePage extends Component {

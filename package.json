@@ -5,9 +5,10 @@
 	"main": "public/main.js",
 	"homepage": "./",
 	"dependencies": {
-		"bootstrap": "^4.1.1",
+		"bootstrap": "^4.0.0",
 		"d3": "^5.4.0",
 		"electron-is-dev": "^0.3.0",
+		"font-awesome": "^4.7.0",
 		"moment": "^2.22.2",
 		"react": "^16.4.0",
 		"react-datepicker": "^1.5.0",
@@ -15,7 +16,7 @@
 		"react-router": "^4.2.0",
 		"react-router-dom": "^4.2.2",
 		"react-scripts": "1.1.4",
-		"reactstrap": "^6.1.0"
+		"reactstrap": "^5.0.0-beta.3"
 	},
 	"scripts": {
 		"start": "react-scripts start",
