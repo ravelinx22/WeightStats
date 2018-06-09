@@ -21,9 +21,9 @@ export default class HistoryPage extends Component {
 					<h3 className="page_title title">Weight History</h3>
 				</Row>
 				<Row>
-					<Col md="4" className="title row_title">Date</Col>
-					<Col md="4" className="title row_title">Weight (lbs)</Col>
-					<Col md="4" className="title row_title">Options</Col>
+					<Col md="4" sm="4" xs="4" className="title row_title">Date</Col>
+					<Col md="4" sm="4" xs="4" className="title row_title">Weight (lbs)</Col>
+					<Col md="4" sm="4" xs="4" className="title row_title">Options</Col>
 				</Row>
 				<NewHistory/>
 				<HistoryList/>

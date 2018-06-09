@@ -65,13 +65,13 @@ export default class HomePage extends Component {
 				<Container>
 					<h6 className="title">Filter by date</h6>
 					<Row>
-						<Col md="6">
+						<Col md="6" sm="6" xs="6">
 							<DatePicker
 								selected={this.state.startDate}
 								onChange={this.onStartDateChange.bind(this)}
 							/>
 						</Col>
-						<Col md="6">
+						<Col md="6" sm="6" xs="6">
 							<DatePicker
 								selected={this.state.endDate}
 								onChange={this.onEndDateChange.bind(this)}
@@ -82,19 +82,19 @@ export default class HomePage extends Component {
 				<Container>
 					<h6 className="title">Compare with objective</h6>
 					<Row>
-						<Col md="4" className="options_col">
+						<Col md="4" sm="4" xs="4" className="options_col">
 							<div>Objective</div>
 							<select>
 								{this.renderObjectiveOptions()}	
 							</select>
 						</Col>
-						<Col md="4" className="options_col">
+						<Col md="4" sm="4" xs="4" className="options_col">
 							<div>Frequency</div>
 							<select>
 								{this.renderFrequencyOptions()}	
 							</select>
 						</Col>
-						<Col md="4" className="options_col">
+						<Col md="4" sm="4" xs="4" className="options_col">
 							<div>Amount (lbs)</div>
 							<select>
 								{this.renderWeightOptions()}

@@ -18,13 +18,13 @@ export default class HistoryItem extends Component {
 	render() {
 		return (
 			<Row className="history_item">
-				<Col md="4" className="history_col">
+				<Col md="4" sm="4" xs="4" className="history_col">
 					20-09-18
 				</Col>
-				<Col md="4" className="history_col">
+				<Col md="4" sm="4" xs="4" className="history_col">
 					128 lbs
 				</Col>
-				<Col md="4" className="history_col">
+				<Col md="4" sm="4" xs="4" className="history_col">
 					<Row className="justify-content-center">
 						<EditBtn/>
 						<RemoveBtn/>

@@ -27,16 +27,16 @@ export default class NewHistory extends Component {
 	render() {
 		return (
 			<Row>
-				<Col md="4" className="new_history_col">
+				<Col md="4" sm="4" xs="4" className="new_history_col">
 					<DatePicker
 						selected={this.state.selectedDate}
 						onChange={this.onDateChange.bind(this)}
 					/>
 				</Col>
-				<Col md="4" className="new_history_col">
+				<Col md="4" sm="4" xs="4" className="new_history_col">
 					<input type="number"/>
 				</Col>
-				<Col md="4" className="new_history_col">
+				<Col md="4" sm="4" xs="4" className="new_history_col">
 					<button className="option_btn">Add</button>
 				</Col>
 			</Row>
