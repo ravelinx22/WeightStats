@@ -2,8 +2,8 @@ import * as d3 from "d3";
 
 export function lineChart() {
 	var margin = {top: 20, right: 20, bottom: 30, left: 50},
-		width = 960 - margin.left - margin.right,
-		height = 500 - margin.top - margin.bottom,
+		width = window.innerWidth*0.68 - margin.left - margin.right,
+		height = (width - margin.left - margin.bottom)*.55 - margin.top - margin.bottom,
 		yTitle = "y-axis",
 		isMultiLine = false,
 		color = d3.scaleOrdinal(d3.schemeCategory10).domain(d3.range(0, 9)),
@@ -24,7 +24,6 @@ export function lineChart() {
 
 	function chart(selection) {
 		selection.each(function(data) {	
-			console.log("entrox2");
 			data = data.map((d,i) => {
 				return {
 					date: xValue(d),
@@ -33,8 +32,7 @@ export function lineChart() {
 				}
 			});
 
-			console.log(xValue)
-			console.log(data);
+			updateDimensions(window.innerWidth);
 
 			x.domain(d3.extent(data, xValue));
 			y.domain([0, d3.max(data, function(d) {
@@ -43,7 +41,9 @@ export function lineChart() {
 				return Math.max(firstValue, secondValue);
 			})]);
 
-			var svg = d3.select(this);
+			var svg = d3.select(this)
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom);
 			svg.select("*").remove();
 
 			var g = svg.append("g")
@@ -88,6 +88,19 @@ export function lineChart() {
 				return line([data[i], data[i+1]])
 			})
 			.on("mouseover", onMouseOver);
+	}
+
+	function updateDimensions(winWidth) {
+		width = winWidth*0.68 - margin.left - margin.right;
+		height = (width - margin.left - margin.bottom)*.55 - margin.top - margin.bottom;
+		x = xScale.rangeRound([0, width]);
+		y = yScale.rangeRound([height, 0]);
+		line = d3.line()
+		.x(function(d) { return x(d.date);   })
+		.y(function(d) { return y(d.close);   });
+		line2 = d3.line()
+		.x(function(d) { return x(d.date);  })
+		.y(function(d) { return y(d.close2)  });
 	}
 
 	chart.width = function(_) {

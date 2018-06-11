@@ -23,6 +23,10 @@ export default class HomePage extends Component {
 		this.renderChart();
 	}
 
+	componentWillUnmount() {
+		      window.addEventListener("resize", null);
+	}
+
 	// Listeners
 
 	onStartDateChange(date) {
@@ -73,6 +77,10 @@ export default class HomePage extends Component {
 
 		svg.datum(d)
 			.call(chart);
+		window.addEventListener("resize", () => {
+			svg.datum(d)
+			.call(chart);
+		});
 	}
 
 	render() {
@@ -82,7 +90,7 @@ export default class HomePage extends Component {
 					<h3 className="page_title title">Weight Stats</h3>
 				</Row>
 				<Row>
-					<svg width="960" height="500"></svg>
+					<svg></svg>
 				</Row>
 				<Container>
 					<h6 className="title">Filter by date</h6>
