@@ -1,4 +1,6 @@
-function lineChart() {
+import * as d3 from "d3";
+
+export function lineChart() {
 	var margin = {top: 20, right: 20, bottom: 30, left: 50},
 		width = 960 - margin.left - margin.right,
 		height = 500 - margin.top - margin.bottom,
@@ -22,6 +24,7 @@ function lineChart() {
 
 	function chart(selection) {
 		selection.each(function(data) {	
+			console.log("entrox2");
 			data = data.map((d,i) => {
 				return {
 					date: xValue(d),
@@ -30,10 +33,13 @@ function lineChart() {
 				}
 			});
 
+			console.log(xValue)
+			console.log(data);
+
 			x.domain(d3.extent(data, xValue));
 			y.domain([0, d3.max(data, function(d) {
-				firstValue = d.close;
-				secondValue = d.close2 ? d.close2 : -1;
+				const firstValue = d.close;
+				const secondValue = d.close2 ? d.close2 : -1;
 				return Math.max(firstValue, secondValue);
 			})]);
 
@@ -122,7 +128,7 @@ function lineChart() {
 
 	chart.onMouseOver = function(_) {
 		if(!arguments.length) return onMouseOver;
-		onMouserOver = _;
+		onMouseOver = _;
 		return chart;
 	}
 

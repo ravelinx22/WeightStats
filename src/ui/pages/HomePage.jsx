@@ -4,6 +4,8 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import * as d3 from "d3";
 
+import { lineChart } from "../charts/lineChart.js";
+import { getData } from "../utils/testData.js";
 import "../css/pages/HomePage.css";
 import "../css/components/Btn.css";
 import 'react-datepicker/dist/react-datepicker.css';
@@ -18,6 +20,7 @@ export default class HomePage extends Component {
 	}
 
 	componentDidMount() {
+		this.renderChart();
 	}
 
 	// Listeners
@@ -38,22 +41,38 @@ export default class HomePage extends Component {
 	renderObjectiveOptions() {
 		const options = ["Loss", "Gain"];
 		return options.map((option) => {
-			return <option value={option}>{option}</option>
+			return <option value={option} key={option}>{option}</option>
 		});
 	}
 
 	renderFrequencyOptions() {
 		const options = ["Weekly", "Montly"];
 		return options.map((option) => {
-			return <option value={option}>{option}</option> 
+			return <option value={option} key={option}>{option}</option> 
 		});
 	}
 
 	renderWeightOptions() {
 		const options = ["0.5","1.0"];
 		return options.map((option) => {
-			return <option value={option}>{option}</option>;
+			return <option value={option} key={option}>{option}</option>;
 		});
+	}
+
+	renderChart() {
+		var parseTime = d3.timeParse("%d-%b-%y");
+
+		var chart = lineChart()
+			.xValue(function(d) { 
+				return parseTime(d.date) ? parseTime(d.date) : d.date;  })
+			.firstYValue(function(d) { return +d.close;  })
+			.secondYValue(function(d) { return +d.close2;  });
+
+		const svg = d3.select("svg");
+		const d = getData();
+
+		svg.datum(d)
+			.call(chart);
 	}
 
 	render() {
@@ -61,6 +80,9 @@ export default class HomePage extends Component {
 			<Container>
 				<Row>
 					<h3 className="page_title title">Weight Stats</h3>
+				</Row>
+				<Row>
+					<svg width="960" height="500"></svg>
 				</Row>
 				<Container>
 					<h6 className="title">Filter by date</h6>
