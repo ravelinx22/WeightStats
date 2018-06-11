@@ -14,7 +14,7 @@ export default class RemoveBtn extends Component {
 
 	render() {
 		return (
-			<button className="option_btn">
+			<button className="option_btn" onClick={this.props.onRemove}>
 				<i className="fa fa-trash"></i>
 			</button>
 		 );

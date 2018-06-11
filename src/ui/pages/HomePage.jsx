@@ -24,7 +24,7 @@ export default class HomePage extends Component {
 	}
 
 	componentWillUnmount() {
-		      window.addEventListener("resize", null);
+		window.addEventListener("resize", null);
 	}
 
 	// Listeners
@@ -67,10 +67,12 @@ export default class HomePage extends Component {
 		var parseTime = d3.timeParse("%d-%b-%y");
 
 		var chart = lineChart()
+			.yTitle("Weight (lbs)")
 			.xValue(function(d) { 
 				return parseTime(d.date) ? parseTime(d.date) : d.date;  })
 			.firstYValue(function(d) { return +d.close;  })
-			.secondYValue(function(d) { return +d.close2;  });
+			.secondYValue(function(d) { return +d.close2;  })
+			.isMultiLine(true);
 
 		const svg = d3.select("svg");
 		const d = getData();
@@ -79,7 +81,7 @@ export default class HomePage extends Component {
 			.call(chart);
 		window.addEventListener("resize", () => {
 			svg.datum(d)
-			.call(chart);
+				.call(chart);
 		});
 	}
 

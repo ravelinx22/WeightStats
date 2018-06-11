@@ -15,6 +15,10 @@ export default class HistoryItem extends Component {
 	componentDidMount() {
 	}
 
+	onRemove() {
+		console.log("buenas");
+	}
+
 	render() {
 		return (
 			<Row className="history_item">
@@ -25,9 +29,8 @@ export default class HistoryItem extends Component {
 					128 lbs
 				</Col>
 				<Col md="4" sm="4" xs="4" className="history_col">
-					<Row className="justify-content-center">
-						<EditBtn/>
-						<RemoveBtn/>
+					<Row className="justify-content-end">
+						<RemoveBtn onRemove={this.onRemove.bind(this)} />
 					</Row>
 				</Col>
 			</Row>

@@ -24,6 +24,10 @@ export default class NewHistory extends Component {
 		});
 	}
 
+	onAdd() {
+		console.log("Add");
+	}
+
 	render() {
 		return (
 			<Row>
@@ -37,7 +41,7 @@ export default class NewHistory extends Component {
 					<input type="number"/>
 				</Col>
 				<Col md="4" sm="4" xs="4" className="new_history_col">
-					<button className="option_btn">Add</button>
+					<button className="option_btn" onClick={this.onAdd.bind(this)}>Add</button>
 				</Col>
 			</Row>
 		);
