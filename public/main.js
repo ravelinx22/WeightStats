@@ -3,6 +3,8 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const isDev = require('electron-is-dev');
 const path = require('path');
+const mongoose = require("mongoose");
+require('dotenv').config()
 
 let mainWindow;
 function createWindow() {
@@ -12,6 +14,8 @@ function createWindow() {
 		minWidth: 750,
 		minHeight: 500
 	});
+
+	mongoose.connect(process.env.DB_HOST);
 
 	mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${path.join(__dirname, '../build/index.html')}`);
 	app.setAboutPanelOptions({
