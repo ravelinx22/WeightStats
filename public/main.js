@@ -5,6 +5,7 @@ const isDev = require('electron-is-dev');
 const path = require('path');
 const mongoose = require("mongoose");
 require('dotenv').config()
+require("./ipc.js");
 
 let mainWindow;
 function createWindow() {

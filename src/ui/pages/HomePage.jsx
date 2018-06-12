@@ -6,6 +6,7 @@ import * as d3 from "d3";
 
 import { lineChart } from "../charts/lineChart.js";
 import { getData } from "../utils/testData.js";
+import { createReading, getReadings, deleteReading } from "../../api/ReadingAPI.js";
 import "../css/pages/HomePage.css";
 import "../css/components/Btn.css";
 import 'react-datepicker/dist/react-datepicker.css';
