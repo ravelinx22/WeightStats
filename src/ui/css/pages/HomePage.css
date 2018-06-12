@@ -12,3 +12,19 @@
 	color: #AFB5E3;
 	margin: 10px 0;
 }
+
+.full_btn {
+	width: 100%;
+}
+
+.weight_title {
+	width: calc(100% - 40px);
+}
+
+.refresh_btn.title.option_btn {
+	font-size: 15px;
+	margin: 25px 0 10px 0;
+	height: 30px;
+	line-height: 15px;
+	width: 30px;
+}

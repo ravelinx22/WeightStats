@@ -49,3 +49,16 @@
 button {
 	cursor: pointer;
 }
+
+/* Line chart */
+.axisBottom line, .axisLeft line {
+	stroke: #9BA2C9;
+}
+
+.axisBottom path, .axisLeft path {
+	stroke: #9BA2C9;
+}
+
+.axisBottom text, .axisLeft text {
+	fill: #9BA2C9;
+}

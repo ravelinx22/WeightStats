@@ -2,7 +2,6 @@ import React, { Component  } from "react";
 import { Row, Col } from "reactstrap";
 
 import RemoveBtn from "./RemoveBtn.jsx";
-import EditBtn from "./EditBtn.jsx";
 import "../css/components/HistoryItem.css";
 
 export default class HistoryItem extends Component {

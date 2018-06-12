@@ -28,7 +28,6 @@ export default class HomePage extends Component {
 	}
 
 	// Listeners
-
 	onStartDateChange(date) {
 		this.setState({
 			startDate: date
@@ -41,18 +40,15 @@ export default class HomePage extends Component {
 		});
 	}
 
+	onRefresh() {
+		console.log("Refresh");
+	}
+
 	//	Helpers
 	renderObjectiveOptions() {
 		const options = ["Loss", "Gain"];
 		return options.map((option) => {
 			return <option value={option} key={option}>{option}</option>
-		});
-	}
-
-	renderFrequencyOptions() {
-		const options = ["Weekly", "Montly"];
-		return options.map((option) => {
-			return <option value={option} key={option}>{option}</option> 
 		});
 	}
 
@@ -74,22 +70,41 @@ export default class HomePage extends Component {
 			.secondYValue(function(d) { return +d.close2;  })
 			.isMultiLine(true);
 
+		this.setState({
+			chart: chart
+		}, () => {
+			this.reloadChart();
+			window.addEventListener("resize", () => {
+				this.reloadChart()
+			});
+		});
+	}
+
+	reloadChart() {
 		const svg = d3.select("svg");
 		const d = getData();
 
 		svg.datum(d)
-			.call(chart);
-		window.addEventListener("resize", () => {
-			svg.datum(d)
-				.call(chart);
-		});
+			.call(this.state.chart);
+	}
+
+	// Filters
+	applyDateFilter() {
+		console.log("Date filter");
+	}
+
+	applyObjectiveFilter() {
+		console.log("Objective filter");
 	}
 
 	render() {
 		return (
 			<Container>
 				<Row>
-					<h3 className="page_title title">Weight Stats</h3>
+					<h3 className="page_title title weight_title">Weight Stats</h3>
+					<button className="page_title option_btn title refresh_btn" onClick={this.onRefresh.bind(this)} >
+						<i className="fa fa-refresh"></i>
+					</button>
 				</Row>
 				<Row>
 					<svg></svg>
@@ -97,17 +112,20 @@ export default class HomePage extends Component {
 				<Container>
 					<h6 className="title">Filter by date</h6>
 					<Row>
-						<Col md="6" sm="6" xs="6">
+						<Col md="4" sm="4" xs="4">
 							<DatePicker
 								selected={this.state.startDate}
 								onChange={this.onStartDateChange.bind(this)}
 							/>
 						</Col>
-						<Col md="6" sm="6" xs="6">
+						<Col md="4" sm="4" xs="4">
 							<DatePicker
 								selected={this.state.endDate}
 								onChange={this.onEndDateChange.bind(this)}
 							/>
+						</Col>
+						<Col md="4" sm="4" xs="4"> 
+							<button className="full_btn option_btn" onClick={this.applyDateFilter.bind(this)}>Apply</button>
 						</Col>
 					</Row>
 				</Container>
@@ -121,16 +139,14 @@ export default class HomePage extends Component {
 							</select>
 						</Col>
 						<Col md="4" sm="4" xs="4" className="options_col">
-							<div>Frequency</div>
-							<select>
-								{this.renderFrequencyOptions()}	
-							</select>
-						</Col>
-						<Col md="4" sm="4" xs="4" className="options_col">
-							<div>Amount (lbs)</div>
+							<div>Amount Weekly (lbs)</div>
 							<select>
 								{this.renderWeightOptions()}
 							</select>
+						</Col>
+						<Col md="4" sm="4" xs="4" className="options_col">
+							<div>Options</div>
+							<button className="option_btn" onClick={this.applyObjectiveFilter.bind(this)}>Apply</button>
 						</Col>
 					</Row>
 				</Container>

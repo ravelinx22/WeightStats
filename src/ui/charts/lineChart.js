@@ -51,11 +51,13 @@ export function lineChart() {
 
 			g.append("g")
 				.call(d3.axisBottom(x))
+				.attr("class", "axisBottom")
 				.attr("transform", "translate(0," + height + ")")
 				.select(".domain");
 
 			g.append("g")
 				.call(d3.axisLeft(y))
+				.attr("class", "axisLeft")
 				.append("text")
 				.attr("fill", "#000")
 				.attr("transform", "rotate(-90)")
