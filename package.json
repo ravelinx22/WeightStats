@@ -7,6 +7,7 @@
 	"dependencies": {
 		"bootstrap": "^4.0.0",
 		"d3": "^5.4.0",
+		"dateformat": "^3.0.3",
 		"dotenv": "^6.0.0",
 		"electron-is-dev": "^0.3.0",
 		"font-awesome": "^4.7.0",

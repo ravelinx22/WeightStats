@@ -2,6 +2,7 @@ import React, { Component  } from "react";
 import { Container, Row, Col } from "reactstrap";
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import dateFormat from 'dateformat';
 import * as d3 from "d3";
 
 import { lineChart } from "../charts/lineChart.js";
@@ -16,7 +17,10 @@ export default class HomePage extends Component {
 		super(props);
 		this.state = {
 			startDate: moment(),
-			endDate: moment().add(1, "Y")
+			endDate: moment().add(1, "Y"),
+			closeHovered: null,
+			close2Hovered: null,
+			dateHovered: null
 		};
 	}
 
@@ -69,7 +73,14 @@ export default class HomePage extends Component {
 				return parseTime(d.date) ? parseTime(d.date) : d.date;  })
 			.firstYValue(function(d) { return +d.close;  })
 			.secondYValue(function(d) { return +d.close2;  })
-			.isMultiLine(true);
+			.isMultiLine(true)
+			.onMouseOver((data) => {
+				this.setState({
+					closeHovered: data.close,
+					close2Hovered: data.close2,
+					dateHovered: dateFormat(data.date, "mmmm dd yyyy")
+				})
+			});
 
 		this.setState({
 			chart: chart
@@ -109,6 +120,15 @@ export default class HomePage extends Component {
 				</Row>
 				<Row>
 					<svg></svg>
+				</Row>
+				<Row>
+					<div className="reading_hovered">Reading: {this.state.closeHovered} lbs</div>
+				</Row>
+				<Row>
+					<div className="reading_hovered">Projected: {this.state.close2Hovered} lbs</div>
+				</Row>
+				<Row>
+					<div className="reading_hovered">Date: {this.state.dateHovered}</div>
 				</Row>
 				<Container>
 					<h6 className="title">Filter by date</h6>

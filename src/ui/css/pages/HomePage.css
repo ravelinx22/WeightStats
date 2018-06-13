@@ -28,3 +28,9 @@
 	line-height: 15px;
 	width: 30px;
 }
+
+.reading_hovered {
+	color: #AFB5E3;
+	text-align: center;
+	width: 100%;
+}
