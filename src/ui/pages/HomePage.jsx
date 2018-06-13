@@ -122,13 +122,16 @@ export default class HomePage extends Component {
 					<svg></svg>
 				</Row>
 				<Row>
-					<div className="reading_hovered">Reading: {this.state.closeHovered} lbs</div>
+					{this.state.close2Hovered ? 
+					<div className="reading_hovered">Reading: {this.state.closeHovered} lbs</div> : null }
 				</Row>
 				<Row>
-					<div className="reading_hovered">Projected: {this.state.close2Hovered} lbs</div>
+					{this.state.close2Hovered ? 
+					<div className="reading_hovered">Projected: {this.state.close2Hovered} lbs</div> : null }
 				</Row>
 				<Row>
-					<div className="reading_hovered">Date: {this.state.dateHovered}</div>
+					{this.state.dateHovered ? 
+					<div className="reading_hovered">Date: {this.state.dateHovered}</div> : null }
 				</Row>
 				<Container>
 					<h6 className="title">Filter by date</h6>
