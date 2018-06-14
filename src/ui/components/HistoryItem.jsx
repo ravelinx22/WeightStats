@@ -1,6 +1,7 @@
 import React, { Component  } from "react";
 import { Row, Col } from "reactstrap";
 import dateFormat from 'dateformat';
+import { deleteReading } from "../../api/ReadingAPI.js";
 
 import RemoveBtn from "./RemoveBtn.jsx";
 import "../css/components/HistoryItem.css";
@@ -16,7 +17,7 @@ export default class HistoryItem extends Component {
 	}
 
 	onRemove() {
-		console.log("buenas");
+		deleteReading({_id: this.props.item._id});
 	}
 
 	render() {

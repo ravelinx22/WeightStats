@@ -1,6 +1,6 @@
 import React, { Component  } from "react";
 import { Container, Row, Col } from "reactstrap";
-import { getReadings, deleteReading } from "../../api/ReadingAPI.js";
+import { getReadings } from "../../api/ReadingAPI.js";
 
 import NewHistory from "../components/NewHistory";
 import HistoryList from "../components/HistoryList";
@@ -23,7 +23,7 @@ export default class HistoryPage extends Component {
 	componentWillUnmount() {
 		this.unSetupSubscriptions();
 	}
-	
+
 	setupSubscriptions() {
 		ipcRenderer.on("responseGetReadings", this.handleGetReadings.bind(this));
 		ipcRenderer.on("responseCreateReading", this.handleCreateReading.bind(this));
@@ -52,6 +52,7 @@ export default class HistoryPage extends Component {
 	}
 
 	handleDeleteReading(event) {
+		getReadings({});
 	}
 
 	render() {
@@ -68,6 +69,6 @@ export default class HistoryPage extends Component {
 				<NewHistory/>
 				<HistoryList data={this.state.data}/>
 			</Container>
-		 );
+		);
 	}
 }

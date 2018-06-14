@@ -11,7 +11,7 @@ ipc.on("createReading", function(event, params) {
 });
 
 ipc.on("getReadings", function(event, params) {
-	Reading.find(params, function(err, docs) {
+	Reading.find(params, null, { sort: { taken: -1 } }, function(err, docs) {
 		event.sender.send("responseGetReadings", docs);
 	});
 });
