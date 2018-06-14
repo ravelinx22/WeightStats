@@ -15,10 +15,9 @@ export default class HistoryList extends Component {
 	}
 
 	renderHistoryItems() {
-		const test = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
-
-		return test.map((item) => {
-			return <HistoryItem key={item} />
+		console.log(this.props.data);
+		return this.props.data.map((item) => {
+			return <HistoryItem key={item._id} item={item}/>
 		});
 	}
 

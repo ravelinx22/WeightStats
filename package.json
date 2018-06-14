@@ -6,6 +6,7 @@
 	"homepage": "./",
 	"dependencies": {
 		"bootstrap": "^4.0.0",
+		"bson-objectid": "^1.2.3",
 		"d3": "^5.4.0",
 		"dateformat": "^3.0.3",
 		"dotenv": "^6.0.0",

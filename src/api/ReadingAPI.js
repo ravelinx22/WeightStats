@@ -1,4 +1,4 @@
-const { ipcRenderer  } = window.require('electron');
+const { ipcRenderer } = window.require('electron');
 
 export function createReading(params) {
 	ipcRenderer.send("createReading", params);

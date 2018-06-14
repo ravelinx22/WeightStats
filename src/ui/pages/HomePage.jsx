@@ -7,10 +7,11 @@ import * as d3 from "d3";
 
 import { lineChart } from "../charts/lineChart.js";
 import { getData } from "../utils/testData.js";
-import { createReading, getReadings, deleteReading } from "../../api/ReadingAPI.js";
+import { getReadings } from "../../api/ReadingAPI.js";
 import "../css/pages/HomePage.css";
 import "../css/components/Btn.css";
 import 'react-datepicker/dist/react-datepicker.css';
+const { ipcRenderer } = window.require('electron');
 
 export default class HomePage extends Component {
 	constructor(props) {
@@ -25,11 +26,21 @@ export default class HomePage extends Component {
 	}
 
 	componentDidMount() {
+		this.setupSubscriptions();
 		this.renderChart();
 	}
 
 	componentWillUnmount() {
+		this.unSetupSubscriptions();
 		window.addEventListener("resize", null);
+	}
+
+	setupSubscriptions() {
+		ipcRenderer.on("responseGetReadings", this.handleGetReadings);
+	}
+
+	unSetupSubscriptions() {
+		ipcRenderer.removeListener("responseGetReadings", this.handleGetReadings);
 	}
 
 	// Listeners
@@ -47,6 +58,7 @@ export default class HomePage extends Component {
 
 	onRefresh() {
 		console.log("Refresh");
+		getReadings();
 	}
 
 	//	Helpers
@@ -107,6 +119,10 @@ export default class HomePage extends Component {
 
 	applyObjectiveFilter() {
 		console.log("Objective filter");
+	}
+
+	// Response handlers
+	handleGetReadings(event, data) {
 	}
 
 	render() {
