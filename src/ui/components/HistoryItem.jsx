@@ -23,7 +23,7 @@ export default class HistoryItem extends Component {
 		return (
 			<Row className="history_item">
 				<Col md="4" sm="4" xs="4" className="history_col">
-					{dateFormat(this.props.item.date, "mmmm dd, yyyy")}
+					{dateFormat(this.props.item.taken, "mmmm dd, yyyy")}
 				</Col>
 				<Col md="4" sm="4" xs="4" className="history_col">
 					{this.props.item.value} lbs

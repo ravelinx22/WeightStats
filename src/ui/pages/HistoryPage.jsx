@@ -1,6 +1,6 @@
 import React, { Component  } from "react";
 import { Container, Row, Col } from "reactstrap";
-import { createReading, getReadings, deleteReading } from "../../api/ReadingAPI.js";
+import { getReadings, deleteReading } from "../../api/ReadingAPI.js";
 
 import NewHistory from "../components/NewHistory";
 import HistoryList from "../components/HistoryList";
@@ -19,21 +19,21 @@ export default class HistoryPage extends Component {
 		this.setupSubscriptions();
 		getReadings();
 	}
-	
+
 	componentWillUnmount() {
 		this.unSetupSubscriptions();
 	}
 	
 	setupSubscriptions() {
 		ipcRenderer.on("responseGetReadings", this.handleGetReadings.bind(this));
-		ipcRenderer.on("responseCreateReading", this.handleGetReadings.bind(this));
-		ipcRenderer.on("responseDeleteReading", this.handleGetReadings.bind(this));
+		ipcRenderer.on("responseCreateReading", this.handleCreateReading.bind(this));
+		ipcRenderer.on("responseDeleteReading", this.handleDeleteReading.bind(this));
 	}
 
 	unSetupSubscriptions() {
-		ipcRenderer.removeListener("responseGetReadings", this.handleGetReadings);
-		ipcRenderer.removeListener("responseCreateReading", this.handleGetReadings);
-		ipcRenderer.removeListener("responseDeleteReading", this.handleGetReadings);
+		ipcRenderer.removeListener("responseGetReadings", () => {});
+		ipcRenderer.removeListener("responseCreateReading", () => {});
+		ipcRenderer.removeListener("responseDeleteReading", () => {});
 	}
 
 	// Response handlers
@@ -48,7 +48,7 @@ export default class HistoryPage extends Component {
 	}
 
 	handleCreateReading(event) {
-		console.log("Se creo");
+		getReadings({});
 	}
 
 	handleDeleteReading(event) {

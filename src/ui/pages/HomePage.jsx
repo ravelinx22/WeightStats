@@ -36,11 +36,11 @@ export default class HomePage extends Component {
 	}
 
 	setupSubscriptions() {
-		ipcRenderer.on("responseGetReadings", this.handleGetReadings);
+		ipcRenderer.on("responseGetReadings", this.handleGetReadings.bind(this));
 	}
 
 	unSetupSubscriptions() {
-		ipcRenderer.removeListener("responseGetReadings", this.handleGetReadings);
+		ipcRenderer.removeListener("responseGetReadings", () => {});
 	}
 
 	// Listeners
