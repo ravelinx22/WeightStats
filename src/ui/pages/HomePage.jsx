@@ -77,8 +77,7 @@ export default class HomePage extends Component {
 			.xValue(function(d) {
 				return parseTime(d.taken) ? parseTime(d.taken) : d.taken;  })
 			.firstYValue(function(d) { return +d.value;  })
-			.secondYValue(function(d) { return +d.value;  })
-			.isMultiLine(true)
+			.secondYValue(function(d) { return +d.proyected;  })
 			.onMouseOver((data) => {
 				this.setState({
 					closeHovered: data.close,
@@ -116,8 +115,9 @@ export default class HomePage extends Component {
 	}
 
 	applyObjectiveFilter() {
-		console.log("Objective filter");
-		console.log(this.props);
+		this.state.chart
+			.isMultiLine(true);
+		getReadings({});
 	}
 
 	render() {

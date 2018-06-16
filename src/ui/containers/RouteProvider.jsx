@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from "reactstrap";
 import { Route, Switch } from 'react-router-dom';
 import { getReadings } from "../../api/ReadingAPI.js";
+import { weeksPassed } from "../utils/Date.js";
 import Constants from "../utils/Constants.js";
 
 import SideMenu from "../components/SideMenu.jsx";
@@ -27,7 +28,7 @@ class RouteProvider extends Component {
 	componentDidMount() {
 		this.setupSubscriptions();
 	}
-
+	
 	componentWillUnmount() {
 		this.unSetupSubscriptions();
 	}
@@ -49,6 +50,7 @@ class RouteProvider extends Component {
 	handleGetReadings(event, docs) {
 		const data = docs.map((d) => {
 			d._doc._id = ObjectID(d._doc._id.id).str;
+			d._doc.proyected = this.getProyected(d._doc);
 			return d._doc;	
 		});
 		this.setState({
@@ -75,6 +77,23 @@ class RouteProvider extends Component {
 		this.setState({
 			amountFilter: event.target.value
 		});
+	}
+
+	// Helpers
+	getProyected(data) {
+		const firstReading = this.state.data.length > 0 ? this.state.data[this.state.data.length-1] : null;
+		if(!firstReading) return;
+
+		const startDate = new Date(firstReading.taken);
+		const endDate = new Date(data.taken);
+		const weeks = weeksPassed(startDate, endDate);
+		const amount = weeks * this.state.amountFilter;
+
+		if(this.state.objectiveFilter === Constants.LOSS) {
+			return firstReading.value - amount;
+		} else if(this.state.objectiveFilter === Constants.GAIN) {
+			return firstReading.value + amount;
+		}
 	}
 
 	render() {
