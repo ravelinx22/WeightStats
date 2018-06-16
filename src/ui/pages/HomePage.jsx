@@ -3,6 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import dateFormat from 'dateformat';
+import Constants from "../utils/Constants.js";
 import * as d3 from "d3";
 
 import { lineChart } from "../charts/lineChart.js";
@@ -55,14 +56,14 @@ export default class HomePage extends Component {
 
 	//	Helpers
 	renderObjectiveOptions() {
-		const options = ["Loss", "Gain"];
+		const options = [Constants.LOSS, Constants.GAIN];
 		return options.map((option) => {
 			return <option value={option} key={option}>{option}</option>
 		});
 	}
 
 	renderWeightOptions() {
-		const options = ["0.5","1.0"];
+		const options = [Constants.POUND,Constants.TWO_POUNDS];
 		return options.map((option) => {
 			return <option value={option} key={option}>{option}</option>;
 		});
@@ -116,10 +117,7 @@ export default class HomePage extends Component {
 
 	applyObjectiveFilter() {
 		console.log("Objective filter");
-	}
-
-	// Response handlers
-	handleGetReadings(event, data) {
+		console.log(this.props);
 	}
 
 	render() {
@@ -171,13 +169,13 @@ export default class HomePage extends Component {
 					<Row>
 						<Col md="4" sm="4" xs="4" className="options_col">
 							<div>Objective</div>
-							<select>
+							<select defaultValue={this.props.objectiveFilter} onChange={this.props.onObjectiveFilterChange}>
 								{this.renderObjectiveOptions()}	
 							</select>
 						</Col>
 						<Col md="4" sm="4" xs="4" className="options_col">
 							<div>Amount Weekly (lbs)</div>
-							<select>
+							<select defaultValue={this.props.amountFilter} onChange={this.props.onAmountFilterChange}>
 								{this.renderWeightOptions()}
 							</select>
 						</Col>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from "reactstrap";
 import { Route, Switch } from 'react-router-dom';
 import { getReadings } from "../../api/ReadingAPI.js";
+import Constants from "../utils/Constants.js";
 
 import SideMenu from "../components/SideMenu.jsx";
 import HomePage from "../pages/HomePage.jsx";
@@ -17,7 +18,9 @@ class RouteProvider extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			data: []
+			data: [],
+			objectiveFilter: Constants.LOSS,
+			amountFilter: Constants.POUND
 		};
 	}
 
@@ -61,6 +64,19 @@ class RouteProvider extends Component {
 		getReadings({});
 	}
 
+	// Listeners
+	onObjectiveFilterChange(event) {
+		this.setState({
+			objectiveFilter: event.target.value
+		});
+	}
+
+	onAmountFilterChange(event) {
+		this.setState({
+			amountFilter: event.target.value
+		});
+	}
+
 	render() {
 		return (
 			<Container fluid={true} className="app">
@@ -71,10 +87,18 @@ class RouteProvider extends Component {
 					<Col md="9" sm="9" xs="9" className="right_side">
 						<Switch>
 							<Route exact path="/" render={(props) => {
-								return React.createElement(HomePage, {...props, data: this.state.data});
+								return React.createElement(HomePage, {...props, 
+									data: this.state.data,
+									objectiveFilter: this.state.objectiveFilter,
+									amountFilter: this.state.amountFilter,
+									onObjectiveFilterChange: this.onObjectiveFilterChange.bind(this),
+									onAmountFilterChange: this.onAmountFilterChange.bind(this)
+								});
 							}} />
 						<Route exact path="/history" render={(props) => {
-							return React.createElement(HistoryPage, {...props, data: this.state.data});
+							return React.createElement(HistoryPage, {...props,
+								data: this.state.data
+							});
 						}} />
 				</Switch>
 			</Col>
