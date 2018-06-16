@@ -71,7 +71,7 @@ class RouteProvider extends Component {
 					<Col md="9" sm="9" xs="9" className="right_side">
 						<Switch>
 							<Route exact path="/" render={(props) => {
-								return React.createElement(HomePage, {...props});
+								return React.createElement(HomePage, {...props, data: this.state.data});
 							}} />
 						<Route exact path="/history" render={(props) => {
 							return React.createElement(HistoryPage, {...props, data: this.state.data});

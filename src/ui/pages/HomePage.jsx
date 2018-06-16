@@ -10,7 +10,6 @@ import { getData } from "../utils/testData.js";
 import { getReadings } from "../../api/ReadingAPI.js";
 import "../css/pages/HomePage.css";
 import 'react-datepicker/dist/react-datepicker.css';
-const { ipcRenderer } = window.require('electron');
 
 export default class HomePage extends Component {
 	constructor(props) {
@@ -25,21 +24,12 @@ export default class HomePage extends Component {
 	}
 
 	componentDidMount() {
-		this.setupSubscriptions();
+		getReadings();
 		this.renderChart();
 	}
 
 	componentWillUnmount() {
-		this.unSetupSubscriptions();
 		window.addEventListener("resize", null);
-	}
-
-	setupSubscriptions() {
-		ipcRenderer.on("responseGetReadings", this.handleGetReadings.bind(this));
-	}
-
-	unSetupSubscriptions() {
-		ipcRenderer.removeListener("responseGetReadings", () => {});
 	}
 
 	// Listeners
@@ -57,7 +47,8 @@ export default class HomePage extends Component {
 
 	onRefresh() {
 		console.log("Refresh");
-		getReadings();
+		console.log(this.props);
+		this.reloadChart();
 	}
 
 	//	Helpers
@@ -76,20 +67,20 @@ export default class HomePage extends Component {
 	}
 
 	renderChart() {
-		var parseTime = d3.timeParse("%d-%b-%y");
+		var parseTime = d3.timeParse("%Y-%m-%dT%H:%M:%S.%LZ");
 
 		var chart = lineChart()
 			.yTitle("Weight (lbs)")
-			.xValue(function(d) { 
-				return parseTime(d.date) ? parseTime(d.date) : d.date;  })
-			.firstYValue(function(d) { return +d.close;  })
-			.secondYValue(function(d) { return +d.close2;  })
+			.xValue(function(d) {
+				return parseTime(d.taken) ? parseTime(d.taken) : d.taken;  })
+			.firstYValue(function(d) { return +d.value;  })
+			.secondYValue(function(d) { return +d.value;  })
 			.isMultiLine(true)
 			.onMouseOver((data) => {
 				this.setState({
 					closeHovered: data.close,
 					close2Hovered: data.close2,
-					dateHovered: dateFormat(data.date, "mmmm dd yyyy")
+					dateHovered: dateFormat(data.taken, "mmmm dd yyyy")
 				})
 			});
 
@@ -105,9 +96,8 @@ export default class HomePage extends Component {
 
 	reloadChart() {
 		const svg = d3.select("svg");
-		const d = getData();
 
-		svg.datum(d)
+		svg.datum(this.props.data)
 			.call(this.state.chart);
 	}
 

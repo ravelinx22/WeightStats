@@ -16,17 +16,17 @@ export function lineChart() {
 		y = yScale.rangeRound([height, 0]),
 		onMouseOver = function(d,i) { return d;  },
 		line = d3.line()
-		.x(function(d) { return x(d.date);   })
+		.x(function(d) { return x(d.taken);   })
 		.y(function(d) { return y(d.close);   }),
 		line2 = d3.line()
-		.x(function(d) { return x(d.date);  })
+		.x(function(d) { return x(d.taken);  })
 		.y(function(d) { return y(d.close2)  });
 
 	function chart(selection) {
 		selection.each(function(data) {	
 			data = data.map((d,i) => {
 				return {
-					date: xValue(d),
+					taken: xValue(d),
 					close: firstYValue(d),
 					close2: secondYValue(d)
 				}
@@ -98,10 +98,10 @@ export function lineChart() {
 		x = xScale.rangeRound([0, width]);
 		y = yScale.rangeRound([height, 0]);
 		line = d3.line()
-		.x(function(d) { return x(d.date);   })
+		.x(function(d) { return x(d.taken);   })
 		.y(function(d) { return y(d.close);   });
 		line2 = d3.line()
-		.x(function(d) { return x(d.date);  })
+		.x(function(d) { return x(d.taken);  })
 		.y(function(d) { return y(d.close2)  });
 	}
 
