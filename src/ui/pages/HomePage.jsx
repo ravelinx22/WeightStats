@@ -6,7 +6,6 @@ import dateFormat from 'dateformat';
 import * as d3 from "d3";
 
 import { lineChart } from "../charts/lineChart.js";
-import { getData } from "../utils/testData.js";
 import { getReadings } from "../../api/ReadingAPI.js";
 import "../css/pages/HomePage.css";
 import 'react-datepicker/dist/react-datepicker.css';
@@ -28,6 +27,10 @@ export default class HomePage extends Component {
 		this.renderChart();
 	}
 
+	componentDidUpdate() {
+		this.reloadChart();
+	}
+
 	componentWillUnmount() {
 		window.addEventListener("resize", null);
 	}
@@ -47,7 +50,6 @@ export default class HomePage extends Component {
 
 	onRefresh() {
 		console.log("Refresh");
-		console.log(this.props);
 		this.reloadChart();
 	}
 
@@ -103,6 +105,12 @@ export default class HomePage extends Component {
 
 	// Filters
 	applyDateFilter() {
+		getReadings({
+			taken: {
+				$gte: this.state.startDate.toDate(),
+				$lte: this.state.endDate.toDate()
+			}
+		});	
 		console.log("Date filter");
 	}
 
