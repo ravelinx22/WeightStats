@@ -4,6 +4,7 @@ import { getReadings } from "../../api/ReadingAPI.js";
 
 import NewHistory from "../components/NewHistory";
 import HistoryList from "../components/HistoryList";
+import "../css/pages/HistoryPage.css";
 const { ipcRenderer } = window.require('electron');
 const ObjectID = require("bson-objectid");
 

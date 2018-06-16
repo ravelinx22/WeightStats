@@ -1,6 +1,6 @@
 /* Buttons */
 
-.option_btn {
+.option_btn, .option_btn.title {
 	margin: 0 5px;
 	background-color: #9BA2C9;
 	border: none;

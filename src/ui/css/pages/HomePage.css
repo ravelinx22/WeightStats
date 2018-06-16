@@ -17,7 +17,7 @@
 	width: 100%;
 }
 
-.weight_title {
+.weight_title.page_title {
 	width: calc(100% - 40px);
 }
 

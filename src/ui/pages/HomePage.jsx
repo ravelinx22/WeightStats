@@ -9,7 +9,6 @@ import { lineChart } from "../charts/lineChart.js";
 import { getData } from "../utils/testData.js";
 import { getReadings } from "../../api/ReadingAPI.js";
 import "../css/pages/HomePage.css";
-import "../css/components/Btn.css";
 import 'react-datepicker/dist/react-datepicker.css';
 const { ipcRenderer } = window.require('electron');
 
