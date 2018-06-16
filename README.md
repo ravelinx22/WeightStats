@@ -8,7 +8,7 @@ weight statistics
 #### You need to create a file named .env in the root directory with the next information.
 
 ```
-  DB_HOST=HERE_YOUR_MONGODB_URL
+DB_HOST=HERE_YOUR_MONGODB_URL
 ```
 
 #### Then build project with the following command.
