@@ -1,7 +1,6 @@
 import React, { Component  } from "react";
 import { Container, Row, Col } from "reactstrap";
 import DatePicker from 'react-datepicker';
-import moment from 'moment';
 import dateFormat from 'dateformat';
 import Constants from "../utils/Constants.js";
 import * as d3 from "d3";
@@ -15,8 +14,8 @@ export default class HomePage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			startDate: moment(),
-			endDate: moment().add(1, "Y"),
+			startDate: Constants.DEFAULT_START_DATE,
+			endDate: Constants.DEFAULT_END_DATE,
 			closeHovered: null,
 			close2Hovered: null,
 			dateHovered: null
@@ -50,8 +49,9 @@ export default class HomePage extends Component {
 	}
 
 	onRefresh() {
-		console.log("Refresh");
-		this.reloadChart();
+		this.state.chart
+			.isMultiLine(false);
+		getReadings({});
 	}
 
 	//	Helpers
@@ -111,7 +111,6 @@ export default class HomePage extends Component {
 				$lte: this.state.endDate.toDate()
 			}
 		});	
-		console.log("Date filter");
 	}
 
 	applyObjectiveFilter() {
@@ -134,58 +133,58 @@ export default class HomePage extends Component {
 				</Row>
 				<Row>
 					{this.state.close2Hovered ? 
-					<div className="reading_hovered">Reading: {this.state.closeHovered} lbs</div> : null }
-				</Row>
-				<Row>
-					{this.state.close2Hovered ? 
-					<div className="reading_hovered">Projected: {this.state.close2Hovered} lbs</div> : null }
-				</Row>
-				<Row>
-					{this.state.dateHovered ? 
-					<div className="reading_hovered">Date: {this.state.dateHovered}</div> : null }
-				</Row>
-				<Container>
-					<h6 className="title">Filter by date</h6>
-					<Row>
-						<Col md="4" sm="4" xs="4">
-							<DatePicker
-								selected={this.state.startDate}
-								onChange={this.onStartDateChange.bind(this)}
-							/>
-						</Col>
-						<Col md="4" sm="4" xs="4">
-							<DatePicker
-								selected={this.state.endDate}
-								onChange={this.onEndDateChange.bind(this)}
-							/>
-						</Col>
-						<Col md="4" sm="4" xs="4"> 
-							<button className="full_btn option_btn" onClick={this.applyDateFilter.bind(this)}>Apply</button>
-						</Col>
-					</Row>
-				</Container>
-				<Container>
-					<h6 className="title">Compare with objective</h6>
-					<Row>
-						<Col md="4" sm="4" xs="4" className="options_col">
-							<div>Objective</div>
-							<select defaultValue={this.props.objectiveFilter} onChange={this.props.onObjectiveFilterChange}>
-								{this.renderObjectiveOptions()}	
-							</select>
-						</Col>
-						<Col md="4" sm="4" xs="4" className="options_col">
-							<div>Amount Weekly (lbs)</div>
-							<select defaultValue={this.props.amountFilter} onChange={this.props.onAmountFilterChange}>
-								{this.renderWeightOptions()}
-							</select>
-						</Col>
-						<Col md="4" sm="4" xs="4" className="options_col">
-							<div>Options</div>
-							<button className="option_btn" onClick={this.applyObjectiveFilter.bind(this)}>Apply</button>
-						</Col>
-					</Row>
-				</Container>
-			</Container>
+							<div className="reading_hovered">Reading: {this.state.closeHovered} lbs</div> : null }
+						</Row>
+						<Row>
+							{this.state.close2Hovered ? 
+									<div className="reading_hovered">Projected: {this.state.close2Hovered} lbs</div> : null }
+								</Row>
+								<Row>
+									{this.state.dateHovered ? 
+											<div className="reading_hovered">Date: {this.state.dateHovered}</div> : null }
+										</Row>
+										<Container>
+											<h6 className="title">Filter by date</h6>
+											<Row>
+												<Col md="4" sm="4" xs="4">
+													<DatePicker
+														selected={this.state.startDate}
+														onChange={this.onStartDateChange.bind(this)}
+													/>
+												</Col>
+												<Col md="4" sm="4" xs="4">
+													<DatePicker
+														selected={this.state.endDate}
+														onChange={this.onEndDateChange.bind(this)}
+													/>
+												</Col>
+												<Col md="4" sm="4" xs="4"> 
+													<button className="full_btn option_btn" onClick={this.applyDateFilter.bind(this)}>Apply</button>
+												</Col>
+											</Row>
+										</Container>
+										<Container>
+											<h6 className="title">Compare with objective</h6>
+											<Row>
+												<Col md="4" sm="4" xs="4" className="options_col">
+													<div>Objective</div>
+													<select defaultValue={this.props.objectiveFilter} onChange={this.props.onObjectiveFilterChange}>
+														{this.renderObjectiveOptions()}	
+													</select>
+												</Col>
+												<Col md="4" sm="4" xs="4" className="options_col">
+													<div>Amount Weekly (lbs)</div>
+													<select defaultValue={this.props.amountFilter} onChange={this.props.onAmountFilterChange}>
+														{this.renderWeightOptions()}
+													</select>
+												</Col>
+												<Col md="4" sm="4" xs="4" className="options_col">
+													<div>Options</div>
+													<button className="option_btn" onClick={this.applyObjectiveFilter.bind(this)}>Apply</button>
+												</Col>
+											</Row>
+										</Container>
+									</Container>
 		);
 	}
 }
