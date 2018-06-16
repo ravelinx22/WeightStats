@@ -41,9 +41,9 @@ class RouteProvider extends Component {
 	}
 
 	unSetupSubscriptions() {
-		ipcRenderer.removeListener("responseGetReadings", () => {});
-		ipcRenderer.removeListener("responseCreateReading", () => {});
-		ipcRenderer.removeListener("responseDeleteReading", () => {});
+		ipcRenderer.removeListener("responseGetReadings", () => null);
+		ipcRenderer.removeListener("responseCreateReading", () => null);
+		ipcRenderer.removeListener("responseDeleteReading", () => null);
 	}
 
 	// Response Handlers
@@ -71,17 +71,17 @@ class RouteProvider extends Component {
 	onObjectiveFilterChange(event) {
 		this.setState({
 			objectiveFilter: event.target.value
-		}, () => {
-			this.reloadProyected();
-		});
+		}, () => (
+			this.reloadProyected()
+		));
 	}
 
 	onAmountFilterChange(event) {
 		this.setState({
 			amountFilter: event.target.value
-		}, () => {
-			this.reloadProyected();
-		});
+		}, () => (
+			this.reloadProyected()
+		));
 	}
 
 	// Helpers
@@ -101,9 +101,9 @@ class RouteProvider extends Component {
 
 	reloadProyected() {
 		const firstReading = (this.state.data.length > 0) ? this.state.data[this.state.data.length-1] : null; 
-		this.state.data.map((d) => {
-			d.proyected = this.getProyected(d, firstReading);
-		});
+		this.state.data.map((d) => (
+			d.proyected = this.getProyected(d, firstReading)
+		));
 	}
 
 	render() {
