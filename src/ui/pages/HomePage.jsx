@@ -91,7 +91,7 @@ export default class HomePage extends Component {
 		}, () => {
 			this.reloadChart();
 			window.addEventListener("resize", () => {
-				this.reloadChart()
+				this.reloadChart();
 			});
 		});
 	}
@@ -105,6 +105,8 @@ export default class HomePage extends Component {
 
 	// Filters
 	applyDateFilter() {
+		this.state.chart
+			.isMultiLine(false);
 		getReadings({
 			taken: {
 				$gte: this.state.startDate.toDate(),
@@ -116,7 +118,7 @@ export default class HomePage extends Component {
 	applyObjectiveFilter() {
 		this.state.chart
 			.isMultiLine(true);
-		getReadings({});
+		this.reloadChart();
 	}
 
 	render() {

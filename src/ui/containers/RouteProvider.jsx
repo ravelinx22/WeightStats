@@ -28,7 +28,7 @@ class RouteProvider extends Component {
 	componentDidMount() {
 		this.setupSubscriptions();
 	}
-	
+
 	componentWillUnmount() {
 		this.unSetupSubscriptions();
 	}
@@ -48,9 +48,10 @@ class RouteProvider extends Component {
 
 	// Response Handlers
 	handleGetReadings(event, docs) {
+		const firstReading = (docs.length > 0) ? docs[docs.length-1] : null; 
 		const data = docs.map((d) => {
 			d._doc._id = ObjectID(d._doc._id.id).str;
-			d._doc.proyected = this.getProyected(d._doc);
+			d._doc.proyected = this.getProyected(d._doc, firstReading._doc);
 			return d._doc;	
 		});
 		this.setState({
@@ -70,20 +71,22 @@ class RouteProvider extends Component {
 	onObjectiveFilterChange(event) {
 		this.setState({
 			objectiveFilter: event.target.value
+		}, () => {
+			this.reloadProyected();
 		});
 	}
 
 	onAmountFilterChange(event) {
 		this.setState({
 			amountFilter: event.target.value
+		}, () => {
+			this.reloadProyected();
 		});
 	}
 
 	// Helpers
-	getProyected(data) {
-		const firstReading = this.state.data.length > 0 ? this.state.data[this.state.data.length-1] : null;
+	getProyected(data, firstReading) {
 		if(!firstReading) return;
-
 		const startDate = new Date(firstReading.taken);
 		const endDate = new Date(data.taken);
 		const weeks = weeksPassed(startDate, endDate);
@@ -94,6 +97,13 @@ class RouteProvider extends Component {
 		} else if(this.state.objectiveFilter === Constants.GAIN) {
 			return firstReading.value + amount;
 		}
+	}
+
+	reloadProyected() {
+		const firstReading = (this.state.data.length > 0) ? this.state.data[this.state.data.length-1] : null; 
+		this.state.data.map((d) => {
+			d.proyected = this.getProyected(d, firstReading);
+		});
 	}
 
 	render() {
